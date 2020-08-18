@@ -1,0 +1,13 @@
+{
+    "variants": {
+        "power=0": { "model": "withsprinkles2:block/raindetector_empty" },
+        "power=1": { "model": "withsprinkles2:block/raindetector_empty" },
+        "power=2": { "model": "withsprinkles2:block/raindetector_empty" },
+        "power=3": { "model": "withsprinkles2:block/raindetector_empty" },
+        "power=4": { "model": "withsprinkles2:block/raindetector_full" },
+        "power=5": { "model": "withsprinkles2:block/raindetector_empty" },
+        "power=6": { "model": "withsprinkles2:block/raindetector_empty" },
+        "power=7": { "model": "withsprinkles2:block/raindetector_empty" },
+        "power=8": { "model": "withsprinkles2:block/raindetector_full" }
+    }
+}

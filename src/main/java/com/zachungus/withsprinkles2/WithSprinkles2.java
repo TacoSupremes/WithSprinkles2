@@ -5,6 +5,8 @@ import com.zachungus.withsprinkles2.items.ModItems;
 import com.zachungus.withsprinkles2.lib.LibMisc;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -28,11 +30,14 @@ public class WithSprinkles2
     // Directly reference a log4j logger.
     public static final Logger LOGGER = LogManager.getLogger();
 
-    public WithSprinkles2() {
+    public WithSprinkles2()
+    {
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
 
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        ModBlocks.TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         //ModItems.makeBlockItems();
 
@@ -54,11 +59,13 @@ public class WithSprinkles2
 
         //LOGGER.info("HELLO FROM PREINIT");
         //LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-
     }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
+    private void doClientStuff(final FMLClientSetupEvent event)
+    {
         // do something that can only be done on the client
+        RenderTypeLookup.setRenderLayer(ModBlocks.ROCK.get(), RenderType.getCutout());
+        RenderTypeLookup.setRenderLayer(ModBlocks.RAIN_DETECTOR.get(), RenderType.getCutout());
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
@@ -78,7 +85,8 @@ public class WithSprinkles2
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
+    public void onServerStarting(FMLServerStartingEvent event)
+    {
         // do something when the server starts
         LOGGER.info("HELLO from server starting");
     }
@@ -86,7 +94,8 @@ public class WithSprinkles2
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
     // Event bus for receiving Registry Events)
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
+    public static class RegistryEvents
+    {
         @SubscribeEvent
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent)
         {
@@ -104,9 +113,11 @@ public class WithSprinkles2
         }
     }
 
-    public static final ItemGroup TAB = new ItemGroup("withsprinkles2tab") {
+    public static final ItemGroup TAB = new ItemGroup("withsprinkles2tab")
+    {
         @Override
-        public ItemStack createIcon() {
+        public ItemStack createIcon()
+        {
             return new ItemStack(Blocks.CAKE);
         }
     };

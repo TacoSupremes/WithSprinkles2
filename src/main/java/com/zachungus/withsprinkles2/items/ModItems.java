@@ -22,7 +22,7 @@ public class ModItems
 
     public static final RegistryObject<Item> ROCK_BLOCK_ITEM = makeBlockItem(ModBlocks.ROCK);
 
-
+    public static final RegistryObject<Item> RAIN_DETECT_ITEM = makeBlockItem(ModBlocks.RAIN_DETECTOR);
 
     public static RegistryObject<Item> makeBlockItem(RegistryObject<BlockMod> b)
     {
