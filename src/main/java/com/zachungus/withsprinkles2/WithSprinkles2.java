@@ -103,14 +103,6 @@ public class WithSprinkles2
            // LOGGER.info("HELLO from Register Block");
        // blockRegistryEvent.getRegistry().register(ModBlocks.test);
         }
-
-        @SubscribeEvent
-        public static void onItemsRegistry(final RegistryEvent.Register<Item> itemRegistryEvent)
-        {
-            // register a new block here
-            // LOGGER.info("HELLO from Register Block");
-           // itemRegistryEvent.getRegistry().register(new BlockItem(ModBlocks.test, new Item.Properties()).setRegistryName(ModBlocks.test.getRegistryName()));
-        }
     }
 
     public static final ItemGroup TAB = new ItemGroup("withsprinkles2tab")

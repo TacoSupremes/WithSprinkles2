@@ -1,8 +1,8 @@
 package com.zachungus.withsprinkles2.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.StateContainer;
@@ -14,6 +14,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
+import net.minecraftforge.common.ToolType;
 
 public class BlockRainDetector extends BlockMod
 {
@@ -27,7 +28,7 @@ public class BlockRainDetector extends BlockMod
 
     public BlockRainDetector()
     {
-        super(Properties.create(Material.WOOD).notSolid());
+        super(Properties.create(Material.WOOD).notSolid().harvestTool(ToolType.AXE).hardnessAndResistance(1.0F, 1.5F).sound(SoundType.WOOD));
         this.setDefaultState(this.stateContainer.getBaseState().with(POWER, 0));
     }
 

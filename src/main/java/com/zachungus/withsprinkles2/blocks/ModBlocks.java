@@ -23,6 +23,12 @@ public class ModBlocks
 
    // public static final RegistryObject<Block> ROCK = BLOCKS.register("rock", () -> new Block(Block.Properties.create(Material.ROCK)));
 
+
+    // double hopper splits stacks round robin between 2 inventories
+
+
+
+
     public static final RegistryObject<BlockMod> ROCK = regBlock(TestBlock::new);
 
     public static final RegistryObject<BlockMod> RAIN_DETECTOR = regBlock(BlockRainDetector::new);

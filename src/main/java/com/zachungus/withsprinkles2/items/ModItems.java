@@ -1,5 +1,6 @@
 package com.zachungus.withsprinkles2.items;
 
+import com.sun.corba.se.spi.ior.IORTemplate;
 import com.zachungus.withsprinkles2.WithSprinkles2;
 import com.zachungus.withsprinkles2.blocks.BlockMod;
 import com.zachungus.withsprinkles2.blocks.ModBlocks;
@@ -13,6 +14,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class ModItems
 {
@@ -20,9 +22,20 @@ public class ModItems
 
     public static final RegistryObject<Item> rock = ITEMS.register("rock2", () -> new Item(new Item.Properties().group(WithSprinkles2.TAB)));
 
+    // heavy boots sink instantly
+
+    public static final RegistryObject<Item> LOST_PAGE = ITEMS.register("lost_page", () -> new Item(new Item.Properties().group(WithSprinkles2.TAB)));
+
+    public static final RegistryObject<Item> PORTABLE_ENDER_CHEST = regItem(ItemEnderChest::new);
+
     public static final RegistryObject<Item> ROCK_BLOCK_ITEM = makeBlockItem(ModBlocks.ROCK);
 
     public static final RegistryObject<Item> RAIN_DETECT_ITEM = makeBlockItem(ModBlocks.RAIN_DETECTOR);
+
+    public static RegistryObject<Item> regItem(final Supplier<? extends ItemMod> sup)
+    {
+        return ITEMS.register(sup.get().getItemRegistryName(), sup);
+    }
 
     public static RegistryObject<Item> makeBlockItem(RegistryObject<BlockMod> b)
     {
