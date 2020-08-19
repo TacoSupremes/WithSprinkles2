@@ -56,7 +56,6 @@ public class BlockRainDetector extends BlockMod
 
     public void updatePower(World w, BlockPos pos)
     {
-
         BlockState state = w.getBlockState(pos);
 
         if (w.isRaining() && canRain(w, pos) && w.canBlockSeeSky(pos))

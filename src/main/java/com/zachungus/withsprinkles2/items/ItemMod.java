@@ -7,7 +7,7 @@ public abstract class ItemMod extends Item
 {
     public ItemMod()
     {
-        super(ItemMod.getDefaultProps());
+        this(ItemMod.getDefaultProps());
     }
 
     public ItemMod(Properties props)

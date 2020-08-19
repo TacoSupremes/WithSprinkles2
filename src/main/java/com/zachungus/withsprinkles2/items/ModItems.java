@@ -22,7 +22,14 @@ public class ModItems
 
     public static final RegistryObject<Item> rock = ITEMS.register("rock2", () -> new Item(new Item.Properties().group(WithSprinkles2.TAB)));
 
-    // heavy boots sink instantly
+    // heavy boots sink instantly to bottom of water
+
+    //xp tome to hold xp
+
+    // lava saver item extinguish player from fire and build obsidian pillar to above lava when falling into lava
+    // 4 blaze rods 4 obsidian 1 ender pearl play ender noise when teleport to top of pillar
+
+    public static final RegistryObject<Item> LAVA_TOTEM = regItem(ItemLavaTotem::new);
 
     public static final RegistryObject<Item> LOST_PAGE = ITEMS.register("lost_page", () -> new Item(new Item.Properties().group(WithSprinkles2.TAB)));
 

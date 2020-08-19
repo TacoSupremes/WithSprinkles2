@@ -5,6 +5,7 @@ import net.minecraft.inventory.container.ChestContainer;
 import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -14,8 +15,9 @@ public class ItemEnderChest extends ItemMod
 {
     public ItemEnderChest()
     {
-        super();
+        super(getDefaultProps().maxStackSize(1));
     }
+
 
     @Override
     public String getItemRegistryName()
