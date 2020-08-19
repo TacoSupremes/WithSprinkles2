@@ -3,12 +3,10 @@ package com.zachungus.withsprinkles2.items;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.monster.BlazeEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -90,9 +88,9 @@ public class ItemLavaTotem extends ItemMod
 
                     if(!w.isRemote)
                     {
-                        for(int x = -1; x<= 1; x++)
+                        for(int x = -1; x <= 1; x++)
                             for(int z = -1; z <= 1; z++)
-                                w.setBlockState(e.getPosition().add(x,0,z), Blocks.OBSIDIAN.getDefaultState());
+                                w.setBlockState(e.getPosition().add(x,0, z), Blocks.OBSIDIAN.getDefaultState());
                     }
 
                     e.setPosition(e.getPosX(), e.getPosY() + 0.25D, e.getPosZ());

@@ -21,6 +21,7 @@ public class BlockRainDetector extends BlockMod
     public static final IntegerProperty POWER = IntegerProperty.create("power", 0, 8);
     protected static final VoxelShape SHAPE = Block.makeCuboidShape(0.0D, 0.0D, 0.0D, 16.0D, 6.0D, 16.0D);
 
+    @Override
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context)
     {
         return SHAPE;
@@ -62,20 +63,19 @@ public class BlockRainDetector extends BlockMod
         {
             if (w.isThundering())
             {
-                if (state.get(POWER).intValue() != 8)
+                if (state.get(POWER) != 8)
                     w.setBlockState(pos, state.with(POWER, 8), 3);
                 return;
             }
 
-            if (state.get(POWER).intValue() != 4)
+            if (state.get(POWER) != 4)
             {
 
                 w.setBlockState(pos, state.with(POWER, 4), 3);
-                return;
             }
 
         }
-        else if (state.get(POWER).intValue() != 0)
+        else if (state.get(POWER) != 0)
             w.setBlockState(pos, state.with(POWER, 0));
     }
     @Override

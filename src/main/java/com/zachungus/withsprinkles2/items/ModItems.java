@@ -26,8 +26,8 @@ public class ModItems
 
     //xp tome to hold xp
 
-    // lava saver item extinguish player from fire and build obsidian pillar to above lava when falling into lava
-    // 4 blaze rods 4 obsidian 1 ender pearl play ender noise when teleport to top of pillar
+
+    // 4 blaze rods 4 obsidian 1 netherwart
 
     public static final RegistryObject<Item> LAVA_TOTEM = regItem(ItemLavaTotem::new);
 
@@ -38,6 +38,8 @@ public class ModItems
     public static final RegistryObject<Item> ROCK_BLOCK_ITEM = makeBlockItem(ModBlocks.ROCK);
 
     public static final RegistryObject<Item> RAIN_DETECT_ITEM = makeBlockItem(ModBlocks.RAIN_DETECTOR);
+
+    public static final RegistryObject<Item> AUTO_DROPPER_ITEM = makeBlockItem(ModBlocks.AUTO_DROPPER);
 
     public static RegistryObject<Item> regItem(final Supplier<? extends ItemMod> sup)
     {
