@@ -6,9 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.DirectionalBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
@@ -20,11 +18,8 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
 
-import javax.annotation.Nullable;
-
 public class BlockAutoDropper extends BlockMod
 {
-
     public static final DirectionProperty FACING = DirectionalBlock.FACING;
 
     public BlockAutoDropper()
@@ -45,13 +40,17 @@ public class BlockAutoDropper extends BlockMod
         return ModBlocks.TILE_AUTO_DROPPER.get().create();
     }
 
-
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         return this.getDefaultState().with(FACING, context.getNearestLookingDirection().getOpposite());
     }
 
+
+
+    // Taken From Botania
+    // Code is credit of Vazkii/WILLIEWILLUS
     @Override
-    public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
+    public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving)
+    {
         if (state.getBlock() != newState.getBlock()) {
             TileEntity te = world.getTileEntity(pos);
             if (te instanceof TileSimpleInventory) {

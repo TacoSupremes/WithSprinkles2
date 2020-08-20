@@ -18,6 +18,8 @@ import net.minecraft.tileentity.TileEntityType;
 
 import javax.annotation.Nonnull;
 
+
+
 public class TileMod extends TileEntity
 {
 
@@ -26,13 +28,6 @@ public class TileMod extends TileEntity
 	{
 		super(tileEntityTypeIn);
 	}
-
-	/*
-	@Override
-	public boolean shouldRefresh(World world, BlockPos pos, @Nonnull IBlockState oldState, @Nonnull IBlockState newState)
-	{
-		return oldState.getBlock() != newState.getBlock();
-	}*/
 
 	@Nonnull
 	@Override
@@ -79,6 +74,4 @@ public class TileMod extends TileEntity
 		super.onDataPacket(net, packet);
 		readCustomNBT(packet.getNbtCompound());
 	}
-
-
 }

@@ -89,7 +89,6 @@ public class TileAutoDropper extends TileSimpleInventory implements ITickableTil
         }
         else
         {
-
             Direction enumfacing = BlockAutoDropper.getFacing(this.getBlockState());
 
             IInventory t = InventoryUtils.getInventory(this.getWorld(), bp);

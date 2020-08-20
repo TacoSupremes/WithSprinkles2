@@ -3,6 +3,7 @@ package com.zachungus.withsprinkles2.blocks.tiles;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntityType;
@@ -10,6 +11,8 @@ import net.minecraft.util.NonNullList;
 
 public abstract class TileSimpleInventory extends TileMod implements IInventory
 {
+
+	// this was taken from Botania mod 1.12
 
 	NonNullList<ItemStack> inventorySlots = NonNullList.withSize(getSizeInventory(), ItemStack.EMPTY);
 
@@ -21,41 +24,12 @@ public abstract class TileSimpleInventory extends TileMod implements IInventory
 	@Override
 	public void readCustomNBT(CompoundNBT par1NBTTagCompound)
 	{
-
 		ItemStackHelper.loadAllItems(par1NBTTagCompound, inventorySlots);
-/*
-		NBTTagList var2 = par1NBTTagCompound.getTagList("Items", 10);
-		inventorySlots = new ItemStack[getSizeInventory()];
-		for (int var3 = 0; var3 < var2.tagCount(); ++var3)
-		{
-			CompoundNBT var4 = var2.getCompoundTagAt(var3);
-			byte var5 = var4.getByte("Slot");
-			if (var5 >= 0 && var5 < inventorySlots.length)
-				inventorySlots[var5] = new ItemStack(var4);
-		}
-		*/
-
 	}
 
 	@Override
 	public void writeCustomNBT(CompoundNBT par1NBTTagCompound)
 	{
-		/*
-		NBTTagList var2 = new NBTTagList();
-		for (int var3 = 0; var3 < inventorySlots.length; ++var3)
-		{
-			if (inventorySlots[var3] != null)
-			{
-				NBTTagCompound var4 = new NBTTagCompound();
-				var4.setByte("Slot", (byte) var3);
-				inventorySlots[var3].writeToNBT(var4);
-				var2.appendTag(var4);
-			}
-		}
-		par1NBTTagCompound.setTag("Items", var2);
-
-		 */
-
 		ItemStackHelper.saveAllItems(par1NBTTagCompound, inventorySlots);
 	}
 
@@ -97,14 +71,6 @@ public abstract class TileSimpleInventory extends TileMod implements IInventory
 	{
 
 		inventorySlots.set(i, itemstack);
-
-		/*
-		if (itemstack != null)
-			inventorySlots[i] = itemstack;
-		else
-			inventorySlots[i] = ItemStack.EMPTY;
-
-		 */
 	}
 
 	@Override
@@ -119,7 +85,6 @@ public abstract class TileSimpleInventory extends TileMod implements IInventory
 		return true;
 	}
 
-
 	@Override
 	public void openInventory(PlayerEntity player)
 	{
@@ -131,7 +96,6 @@ public abstract class TileSimpleInventory extends TileMod implements IInventory
 	{
 
 	}
-
 
 	@Override
 	public void clear()
