@@ -31,8 +31,6 @@ public class TileAutoDropper extends TileSimpleInventory implements ITickableTil
         if (this.getStackInSlot(0) == null || this.getStackInSlot(0).isEmpty() || this.getWorld().isBlockPowered(pos))
             return;
 
-
-
         BlockPos bp = getPos().add(BlockAutoDropper.getFacing(this.getBlockState()).getDirectionVec());
 
         if (InventoryUtils.getInventory(this.getWorld(), bp) == null)
@@ -99,8 +97,6 @@ public class TileAutoDropper extends TileSimpleInventory implements ITickableTil
             this.markDirty();
         }
     }
-
-
 
     @Override
     public int getSizeInventory()

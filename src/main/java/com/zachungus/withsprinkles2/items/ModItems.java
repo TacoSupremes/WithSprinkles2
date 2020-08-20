@@ -40,6 +40,8 @@ public class ModItems
 
     public static final RegistryObject<Item> AUTO_DROPPER_ITEM = makeBlockItem(ModBlocks.AUTO_DROPPER);
 
+    public static final RegistryObject<Item> ENDER_HOPPER_ITEM = makeBlockItem(ModBlocks.ENDER_HOPPER);
+
     public static final RegistryObject<Item> AUTO_DISPENSER_ITEM = ITEMS.register("auto_dispenser", () -> new BlockItem(ModBlocks.AUTO_DISPENSER.get(), new Item.Properties().group(WithSprinkles2.TAB)));
 
     public static RegistryObject<Item> regItem(final Supplier<? extends ItemMod> sup)
