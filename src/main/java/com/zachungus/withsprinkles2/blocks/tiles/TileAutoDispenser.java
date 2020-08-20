@@ -10,7 +10,6 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -18,11 +17,6 @@ import net.minecraftforge.fluids.FluidUtil;
 
 public class TileAutoDispenser extends TileSimpleInventory implements ITickableTileEntity
 {
-    public TileAutoDispenser(TileEntityType<?> tileEntityTypeIn)
-    {
-        super(tileEntityTypeIn);
-    }
-
     public TileAutoDispenser()
     {
         super(ModBlocks.TILE_AUTO_DISPENSER.get());
@@ -54,12 +48,15 @@ public class TileAutoDispenser extends TileSimpleInventory implements ITickableT
     @Override
     public void tick()
     {
-        if (this.getStackInSlot(0) == null || this.getStackInSlot(0).isEmpty() || this.getWorld().isBlockPowered(pos))
+        if (this.getStackInSlot(0) == null || this.getStackInSlot(0).isEmpty() || this.getWorld().isBlockPowered(this.getPos()))
             return;
 
 
         dispense(this.getWorld(), this.getPos());
 
+
+        // check if leftover item is a bucket and drop item in world
+        // prevents fluids from being placed and picked up repeatedly
         if(isBucket(this.getStackInSlot(0)))
         {
             ItemEntity e = new ItemEntity(EntityType.ITEM, this.getWorld());
@@ -169,7 +166,6 @@ public class TileAutoDispenser extends TileSimpleInventory implements ITickableT
     }*/
 
     }
-
 
 
     private boolean isBucket(ItemStack is)

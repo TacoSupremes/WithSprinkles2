@@ -3,6 +3,7 @@ package com.zachungus.withsprinkles2;
 import com.zachungus.withsprinkles2.blocks.ModBlocks;
 import com.zachungus.withsprinkles2.items.ModItems;
 import com.zachungus.withsprinkles2.lib.LibMisc;
+import com.zachungus.withsprinkles2.util.OfflinePlayerUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.RenderType;
@@ -50,6 +51,7 @@ public class WithSprinkles2
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         // Register ourselves for server and other game events we are interested in
+        MinecraftForge.EVENT_BUS.register(OfflinePlayerUtils.class);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
