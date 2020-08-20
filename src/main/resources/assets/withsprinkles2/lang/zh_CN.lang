@@ -1,0 +1,14 @@
+itemGroup.withsprinkles=彩针
+tile.autoDropper.name=自动投掷器
+tile.enderHopper.name=黑曜石漏斗
+tile.rainDetector.name=降水检测器
+item.refillGem.name=排序宝石
+item.oldPaper.name=残卷
+item.enderChest.name=灌注的末影之眼
+enchantment.withsprinkles:exchange=互换
+enchantment.withsprinkles:fiery=火热光环
+enchantment.withsprinkles:felling=砍伐
+enchantment.withsprinkles:multiple=多重
+enchantment.withsprinkles:fracking=矿脉挖掘
+withsprinkles.bound=目前绑定于
+withsprinkles.mode=模式

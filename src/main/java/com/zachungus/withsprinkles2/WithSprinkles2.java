@@ -66,23 +66,18 @@ public class WithSprinkles2
     private void doClientStuff(final FMLClientSetupEvent event)
     {
         // do something that can only be done on the client
-        RenderTypeLookup.setRenderLayer(ModBlocks.ROCK.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(ModBlocks.RAIN_DETECTOR.get(), RenderType.getCutout());
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+       // LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
     {
         // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
     }
 
     private void processIMC(final InterModProcessEvent event)
     {
         // some example code to receive and process InterModComms from other mods
-        LOGGER.info("Got IMC {}", event.getIMCStream().
-                map(m->m.getMessageSupplier().get()).
-                collect(Collectors.toList()));
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -90,7 +85,7 @@ public class WithSprinkles2
     public void onServerStarting(FMLServerStartingEvent event)
     {
         // do something when the server starts
-        LOGGER.info("HELLO from server starting");
+       // LOGGER.info("HELLO from server starting");
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
@@ -107,7 +102,7 @@ public class WithSprinkles2
         }
     }
 
-    public static final ItemGroup TAB = new ItemGroup("withsprinkles2tab")
+    public static final ItemGroup TAB = new ItemGroup("withsprinkles2.tab")
     {
         @Override
         public ItemStack createIcon()

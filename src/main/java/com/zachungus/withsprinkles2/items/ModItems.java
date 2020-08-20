@@ -20,7 +20,7 @@ public class ModItems
 {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, LibMisc.ModID);
 
-    public static final RegistryObject<Item> rock = ITEMS.register("rock2", () -> new Item(new Item.Properties().group(WithSprinkles2.TAB)));
+   // public static final RegistryObject<Item> rock = ITEMS.register("rock2", () -> new Item(new Item.Properties().group(WithSprinkles2.TAB)));
 
     // heavy boots sink instantly to bottom of water
 
@@ -36,14 +36,11 @@ public class ModItems
 
     public static final RegistryObject<Item> PORTABLE_BOUND_ENDER_CHEST = regItem(ItemBoundEnderChest::new);
 
-    public static final RegistryObject<Item> ROCK_BLOCK_ITEM = makeBlockItem(ModBlocks.ROCK);
-
     public static final RegistryObject<Item> RAIN_DETECT_ITEM = makeBlockItem(ModBlocks.RAIN_DETECTOR);
 
     public static final RegistryObject<Item> AUTO_DROPPER_ITEM = makeBlockItem(ModBlocks.AUTO_DROPPER);
 
     public static final RegistryObject<Item> AUTO_DISPENSER_ITEM = ITEMS.register("auto_dispenser", () -> new BlockItem(ModBlocks.AUTO_DISPENSER.get(), new Item.Properties().group(WithSprinkles2.TAB)));
-
 
     public static RegistryObject<Item> regItem(final Supplier<? extends ItemMod> sup)
     {

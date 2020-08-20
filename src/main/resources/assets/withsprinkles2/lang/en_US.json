@@ -1,0 +1,21 @@
+{
+    "itemGroup.withsprinkles2.tab": "With Sprinkles 2",
+
+    "block.withsprinkles2.auto_dropper": "Auto Dropper",
+    "block.withsprinkles2.ender_hopper": "Obsidian Hopper",
+    "block.withsprinkles2.rain_detector": "Rain Detector",
+    "block.withsprinkles2.shared_ender_chest": "Bound Ender Chest",
+    "block.withsprinkles2.auto_dispenser": "Auto Dispenser",
+    "item.withsprinkles2.lost_page": "Lost Page",
+    "item.withsprinkles2.portable_ender_chest": "Infused Eye of Ender",
+    "item.withsprinkles2.portable_bound_ender_chest": "Infused Eye of Ender",
+    "item.withsprinkles2.lava_totem": "Blaze Totem",
+    "enchantment.withsprinkles2:exchange": "Exchange",
+    "enchantment.withsprinkles2:fiery": "Fiery Aura",
+    "enchantment.withsprinkles2:felling": "Felling",
+    "enchantment.withsprinkles2:multiple": "Multiple",
+    "enchantment.withsprinkles2:fracking": "Fracking",
+    "withsprinkles2.bound": "Currently bound to",
+    "withsprinkles2.unbound": "Unbound",
+    "withsprinkles2.mode": "Mode"
+}
