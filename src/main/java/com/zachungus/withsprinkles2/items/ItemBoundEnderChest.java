@@ -15,6 +15,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
@@ -32,7 +33,7 @@ public class ItemBoundEnderChest extends ItemMod
         return "portable_bound_ender_chest";
     }
 
-    public static final TranslationTextComponent ENDERCHESTNAME = new TranslationTextComponent("container.enderchest");
+    public static final TranslationTextComponent ENDER_CHEST_NAME = new TranslationTextComponent("container.enderchest");
 
     public final String PLAYER_UUID = "PLAYER_UUID";
     public final String PLAYER_NAME = "PLAYER_NAME";
@@ -59,15 +60,14 @@ public class ItemBoundEnderChest extends ItemMod
             is.getTag().putString(PLAYER_NAME, target.getDisplayName().getString());
         }
 
-
         if(!w.isRemote)
         {
-
+            StringTextComponent s = new StringTextComponent(is.getTag().getString(PLAYER_NAME) + "'s ");
 
             player.openContainer(new SimpleNamedContainerProvider((id, playerInventory, player2) -> {
 
                 return ChestContainer.createGeneric9X3(id, playerInventory, target != null ? target.getInventoryEnderChest() :  OfflinePlayerUtils.getOfflineEnderChest(u, w));
-                }, ENDERCHESTNAME));
+                }, s.appendSibling(ENDER_CHEST_NAME)));
         }
         else
         {
@@ -77,7 +77,6 @@ public class ItemBoundEnderChest extends ItemMod
         return super.onItemRightClick(w, player, hand);
     }
 
-
     @Override
     @OnlyIn(Dist.CLIENT)
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn)
@@ -86,13 +85,13 @@ public class ItemBoundEnderChest extends ItemMod
 
         if(stack.hasTag())
         {
-            tooltip.add(new StringTextComponent(I18n.format(LibMisc.ModID + '.' + "bound") + ": " +  stack.getTag().getString(PLAYER_NAME)));
+            // gray color code
+            tooltip.add(new StringTextComponent("§7" + I18n.format(LibMisc.ModID + '.' + "bound") + ": " +  stack.getTag().getString(PLAYER_NAME)));
         }
         else
         {
-            tooltip.add(new StringTextComponent(I18n.format(LibMisc.ModID + '.' + "unbound")));
+            //red color code
+            tooltip.add(new StringTextComponent("§c" + I18n.format(LibMisc.ModID + '.' + "unbound")));
         }
-
-
     }
 }

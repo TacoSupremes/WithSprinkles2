@@ -5,6 +5,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Rarity;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -23,7 +24,7 @@ public class ItemLavaTotem extends ItemMod
 
     public ItemLavaTotem()
     {
-        super(ItemMod.getDefaultProps().maxStackSize(1));
+        super(ItemMod.getDefaultProps().maxStackSize(1).rarity(Rarity.UNCOMMON));
     }
 
     public boolean isFirstInHotBar(Entity e, ItemStack stack, int slot)
