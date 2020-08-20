@@ -34,6 +34,8 @@ public class ModItems
 
     public static final RegistryObject<Item> PORTABLE_ENDER_CHEST = regItem(ItemEnderChest::new);
 
+    public static final RegistryObject<Item> PORTABLE_BOUND_ENDER_CHEST = regItem(ItemBoundEnderChest::new);
+
     public static final RegistryObject<Item> ROCK_BLOCK_ITEM = makeBlockItem(ModBlocks.ROCK);
 
     public static final RegistryObject<Item> RAIN_DETECT_ITEM = makeBlockItem(ModBlocks.RAIN_DETECTOR);

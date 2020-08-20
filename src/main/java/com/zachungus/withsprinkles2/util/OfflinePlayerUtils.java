@@ -101,12 +101,7 @@ public class OfflinePlayerUtils
 
 		EnderChestInventory ii = new EnderChestInventory();
 
-		//ItemStackHelper.loadAllItems();
-
-		NonNullList<ItemStack> L = NonNullList.withSize(ii.getSizeInventory(), ItemStack.EMPTY);
-		loadAllEnderItems(nbt, L);
-
-		//ii.loadInventoryFromNBT(nbt.getTagList("EnderItems", 10));
+		ii.read(nbt.getList("EnderItems",10));
 
 		mapEnder.put(uuid, ii);
 
@@ -117,18 +112,7 @@ public class OfflinePlayerUtils
 	{
 		CompoundNBT nbt = OfflinePlayerUtils.getOfflinePlayerNBT(uuid, w);
 
-		//ItemStackHelper.saveAllItems()
-
-		EnderChestInventory ee = getOfflineEnderChest(uuid, w);
-
-		NonNullList<ItemStack> t = NonNullList.withSize(ee.getSizeInventory(), ItemStack.EMPTY);
-
-		for(int i = 0; i< ee.getSizeInventory(); i++)
-			t.set(i, ee.getStackInSlot(i));
-
-		//nbt.setTag("EnderItems", .saveInventoryToNBT());
-
-		saveAllEnderItems(nbt, t,true);
+		nbt.put("EnderItems", OfflinePlayerUtils.getOfflineEnderChest(uuid, w).write());
 
 		map.put(uuid, nbt);
 	}
@@ -177,44 +161,6 @@ public class OfflinePlayerUtils
 
 				OfflinePlayerUtils.saveOfflineNBT(uuid, (World) event.getWorld());
 
-			}
-		}
-	}
-
-	public static CompoundNBT saveAllEnderItems(CompoundNBT tag, NonNullList<ItemStack> list, boolean saveEmpty)
-	{
-		ListNBT listnbt = new ListNBT();
-
-		for(int i = 0; i < list.size(); ++i)
-		{
-			ItemStack itemstack = list.get(i);
-			if (!itemstack.isEmpty())
-			{
-				CompoundNBT compoundnbt = new CompoundNBT();
-				compoundnbt.putByte("Slot", (byte)i);
-				itemstack.write(compoundnbt);
-				listnbt.add(compoundnbt);
-			}
-		}
-
-		if (!listnbt.isEmpty() || saveEmpty)
-		{
-			tag.put("EnderItems", listnbt);
-		}
-
-		return tag;
-	}
-
-	public static void loadAllEnderItems(CompoundNBT tag, NonNullList<ItemStack> list)
-	{
-		ListNBT listnbt = tag.getList("EnderItems", 10);
-
-		for(int i = 0; i < listnbt.size(); ++i) {
-			CompoundNBT compoundnbt = listnbt.getCompound(i);
-			int j = compoundnbt.getByte("Slot") & 255;
-			if (j >= 0 && j < list.size())
-			{
-				list.set(j, ItemStack.read(compoundnbt));
 			}
 		}
 	}
