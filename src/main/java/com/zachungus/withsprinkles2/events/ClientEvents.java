@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = LibMisc.ModID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ClientEvents
 {
-    public static final ResourceLocation IRON_CHEST_LOCATION = new ResourceLocation(LibMisc.ModID, "model/bound_ender_chest");
+    public static final ResourceLocation BOUND_CHEST_LOCATION = new ResourceLocation(LibMisc.ModID, "model/bound_ender_chest");
 
     @SubscribeEvent
     public static void onStitch(TextureStitchEvent.Pre event)
@@ -21,6 +21,6 @@ public class ClientEvents
             return;
         }
 
-        event.addSprite(IRON_CHEST_LOCATION);
+        event.addSprite(BOUND_CHEST_LOCATION);
     }
 }

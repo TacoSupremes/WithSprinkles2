@@ -2,12 +2,9 @@ package com.zachungus.withsprinkles2.blocks.tiles;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import java.util.Calendar;
 
 import com.zachungus.withsprinkles2.blocks.BlockBoundEnderChest;
 import com.zachungus.withsprinkles2.events.ClientEvents;
-import com.zachungus.withsprinkles2.lib.LibMisc;
-import net.minecraft.block.AbstractChestBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -24,15 +21,9 @@ import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.state.properties.ChestType;
 import net.minecraft.tileentity.ChestTileEntity;
 import net.minecraft.tileentity.IChestLid;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityMerger;
 import net.minecraft.util.Direction;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-
-
 
 
 public class TileBoundEnderChestRenderer extends TileEntityRenderer<TileBoundEnderChest> {
@@ -104,6 +95,6 @@ public class TileBoundEnderChestRenderer extends TileEntityRenderer<TileBoundEnd
 
     protected Material getMaterial() {
 
-        return new Material(Atlases.CHEST_ATLAS, ClientEvents.IRON_CHEST_LOCATION);
+        return new Material(Atlases.CHEST_ATLAS, ClientEvents.BOUND_CHEST_LOCATION);
     }
 }
