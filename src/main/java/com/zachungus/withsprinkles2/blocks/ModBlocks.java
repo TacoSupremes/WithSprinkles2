@@ -1,9 +1,6 @@
 package com.zachungus.withsprinkles2.blocks;
 
-import com.zachungus.withsprinkles2.blocks.tiles.TileAutoDispenser;
-import com.zachungus.withsprinkles2.blocks.tiles.TileAutoDropper;
-import com.zachungus.withsprinkles2.blocks.tiles.TileEnderHopper;
-import com.zachungus.withsprinkles2.blocks.tiles.TileRainDetector;
+import com.zachungus.withsprinkles2.blocks.tiles.*;
 import com.zachungus.withsprinkles2.lib.LibMisc;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -35,6 +32,7 @@ public class ModBlocks
 
     public static final RegistryObject<BlockMod> ENDER_HOPPER = regBlock(BlockEnderHopper::new);
 
+    public static final RegistryObject<BlockMod> BOUND_ENDER_CHEST = regBlock(BlockBoundEnderChest::new);
 
     //tiles
     public static final RegistryObject<TileEntityType<?>> TILE_RAIN_DETECT = regTile(TileRainDetector::new, ModBlocks.RAIN_DETECTOR);
@@ -44,6 +42,12 @@ public class ModBlocks
     public static final RegistryObject<TileEntityType<?>> TILE_AUTO_DISPENSER = TILES.register("auto_dispenser", () -> TileEntityType.Builder.create(TileAutoDispenser::new, ModBlocks.AUTO_DISPENSER.get()).build(null));
 
     public static final RegistryObject<TileEntityType<?>> TILE_ENDER_HOPPER = regTile(TileEnderHopper::new, ModBlocks.ENDER_HOPPER);
+
+    public static final RegistryObject<TileEntityType<TileBoundEnderChest>> TILE_BOUND_ENDER_CHEST = TILES.register(ModBlocks.BOUND_ENDER_CHEST.getId().getPath(), () -> TileEntityType.Builder.create(TileBoundEnderChest::new, ModBlocks.BOUND_ENDER_CHEST.get()).build(null));
+
+
+
+
 
     public static RegistryObject<TileEntityType<?>> regTile(final Supplier<? extends TileEntity> sup, RegistryObject<BlockMod> bm)
     {

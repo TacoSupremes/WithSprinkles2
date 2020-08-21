@@ -64,6 +64,8 @@ public class ItemBoundEnderChest extends ItemMod
         {
             StringTextComponent s = new StringTextComponent(is.getTag().getString(PLAYER_NAME) + "'s ");
 
+
+
             player.openContainer(new SimpleNamedContainerProvider((id, playerInventory, player2) -> {
 
                 return ChestContainer.createGeneric9X3(id, playerInventory, target != null ? target.getInventoryEnderChest() :  OfflinePlayerUtils.getOfflineEnderChest(u, w));

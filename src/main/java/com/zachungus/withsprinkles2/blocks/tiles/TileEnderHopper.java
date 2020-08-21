@@ -1,6 +1,5 @@
 package com.zachungus.withsprinkles2.blocks.tiles;
 
-
 import com.zachungus.withsprinkles2.blocks.BlockEnderHopper;
 import com.zachungus.withsprinkles2.blocks.ModBlocks;
 import com.zachungus.withsprinkles2.util.InventoryUtils;
@@ -19,7 +18,6 @@ import java.util.UUID;
 
 public class TileEnderHopper extends TileSimpleInventory implements ITickableTileEntity
 {
-
     public TileEnderHopper()
     {
         super(ModBlocks.TILE_ENDER_HOPPER.get());
@@ -37,7 +35,7 @@ public class TileEnderHopper extends TileSimpleInventory implements ITickableTil
         return true;
     }
 
-    public UUID uuid = new UUID(1000, 1000);
+    public UUID uuid = null;
 
     int ticks = 0;
 
@@ -60,7 +58,6 @@ public class TileEnderHopper extends TileSimpleInventory implements ITickableTil
        // && this.getWorld().getBlockState(getPos().up()).getBlock() != ModBlocks.sharedEnderChest
         if (InventoryUtils.getInventory(getWorld(), getPos().up()) != null && (this.getWorld().getBlockState(getPos().up()).getBlock() != Blocks.ENDER_CHEST  ))
         {
-
             IInventory ii = InventoryUtils.getInventory(getWorld(), getPos().up());
 
             for (int i = 0; i < ii.getSizeInventory(); i++)
@@ -100,13 +97,9 @@ public class TileEnderHopper extends TileSimpleInventory implements ITickableTil
 
                 ii.setInventorySlotContents(i, result);
 
-              //  this.setInventorySlotContents(0, ii.decrStackSize(i, 1));
-
-                ii.markDirty();
-                this.markDirty();
-
-                if(result.isEmpty()) {
-
+                if(result.isEmpty())
+                {
+                    ii.markDirty();
                     break;
                 }
 
@@ -175,9 +168,6 @@ public class TileEnderHopper extends TileSimpleInventory implements ITickableTil
 
         }
 */
-
-
-
         for(int inv = 0; inv < this.getSizeInventory(); inv++)
         {
 
@@ -199,6 +189,7 @@ public class TileEnderHopper extends TileSimpleInventory implements ITickableTil
                 if(result.isEmpty())
                 {
                     InventoryUtils.getInventory(getWorld(), getPos().add(enumf.getDirectionVec())).markDirty();
+                    return;
                 }
 
 
@@ -221,7 +212,8 @@ public class TileEnderHopper extends TileSimpleInventory implements ITickableTil
                             if (ii.getStackInSlot(i).getCount() == ii.getStackInSlot(i).getMaxStackSize())
                                 continue;
 
-                            if (is.getCount() + ii.getStackInSlot(i).getCount() <= is.getMaxStackSize()) {
+                            if (is.getCount() + ii.getStackInSlot(i).getCount() <= is.getMaxStackSize())
+                            {
 
                                 ii.setInventorySlotContents(i, new ItemStack(is.getItem(), is.getCount() + ii.getStackInSlot(i).getCount()));
                                 this.setInventorySlotContents(inv, ItemStack.EMPTY);
@@ -247,11 +239,11 @@ public class TileEnderHopper extends TileSimpleInventory implements ITickableTil
 
                 }
 
-                if (slotChosen != -1) {
+                if (slotChosen != -1)
+                {
                     ii.setInventorySlotContents(slotChosen, is);
                     this.setInventorySlotContents(0, ItemStack.EMPTY);
                     ii.markDirty();
-                    this.markDirty();
                 }
 
             }
@@ -318,15 +310,11 @@ public class TileEnderHopper extends TileSimpleInventory implements ITickableTil
     public void readCustomNBT(CompoundNBT par1nbtTagCompound)
     {
         super.readCustomNBT(par1nbtTagCompound);
-
-        this.uuid = UUID.fromString(par1nbtTagCompound.getString("PNAME"));
+        if(par1nbtTagCompound.contains("PNAME"))
+            this.uuid = UUID.fromString(par1nbtTagCompound.getString("PNAME"));
 
         this.ticks = par1nbtTagCompound.getInt("TICKS");
 
-        if(this.getStackInSlot(1) == null)
-        {
-            this.setInventorySlotContents(1, ItemStack.EMPTY);
-        }
     }
 
     @Override
@@ -334,8 +322,8 @@ public class TileEnderHopper extends TileSimpleInventory implements ITickableTil
     {
 
         super.writeCustomNBT(par1nbtTagCompound);
-
-        par1nbtTagCompound.putString("PNAME", this.uuid.toString());
+        if(uuid != null)
+            par1nbtTagCompound.putString("PNAME", this.uuid.toString());
 
         par1nbtTagCompound.putInt("TICKS", this.ticks);
     }
