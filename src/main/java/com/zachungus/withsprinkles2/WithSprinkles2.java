@@ -1,8 +1,9 @@
 package com.zachungus.withsprinkles2;
 
 import com.zachungus.withsprinkles2.blocks.ModBlocks;
-import com.zachungus.withsprinkles2.blocks.tiles.TileBoundEnderChest;
 import com.zachungus.withsprinkles2.blocks.tiles.TileBoundEnderChestRenderer;
+import com.zachungus.withsprinkles2.enchants.ModEnchantments;
+import com.zachungus.withsprinkles2.events.WS2Events;
 import com.zachungus.withsprinkles2.items.ModItems;
 import com.zachungus.withsprinkles2.lib.LibMisc;
 import com.zachungus.withsprinkles2.util.OfflinePlayerUtils;
@@ -10,17 +11,11 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
-import net.minecraft.client.renderer.tileentity.ChestTileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.*;
-import net.minecraftforge.client.model.pipeline.TRSRTransformer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -30,9 +25,6 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Mod(LibMisc.ModID)
 public class WithSprinkles2
@@ -52,6 +44,8 @@ public class WithSprinkles2
         //ModItems.makeBlockItems();
 
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        ModEnchantments.ENCHANTS.register(FMLJavaModLoadingContext.get().getModEventBus());
         // Register the enqueueIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         // Register the processIMC method for modloading
@@ -62,6 +56,7 @@ public class WithSprinkles2
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(OfflinePlayerUtils.class);
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(WS2Events.class);
     }
 
     private void setup(final FMLCommonSetupEvent event)

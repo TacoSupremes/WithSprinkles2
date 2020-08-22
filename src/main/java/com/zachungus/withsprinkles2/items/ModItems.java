@@ -48,9 +48,6 @@ public class ModItems
 
     public static final RegistryObject<Item> BOUND_ENDER_CHEST_ITEM = ITEMS.register("bound_ender_chest", () -> new BlockItem(ModBlocks.BOUND_ENDER_CHEST.get(), new Item.Properties().group(WithSprinkles2.TAB).setISTER(()-> boundChestRenderer())));
 
-
-   // public static final RegistryObject<Item> BOUND_ENDER_CHEST_ITEM = makeBlockItem(ModBlocks.BOUND_ENDER_CHEST);
-
     public static RegistryObject<Item> regItem(final Supplier<? extends ItemMod> sup)
     {
         return ITEMS.register(sup.get().getItemRegistryName(), sup);
@@ -59,11 +56,6 @@ public class ModItems
     public static RegistryObject<Item> makeBlockItem(RegistryObject<BlockMod> b)
     {
         return ITEMS.register(b.getId().getPath(), () -> new BlockItem(b.get(), new Item.Properties().group(WithSprinkles2.TAB)));
-    }
-
-    public static RegistryObject<Item> makeBlockItem(RegistryObject<BlockMod> b, Item.Properties props)
-    {
-        return ITEMS.register(b.getId().getPath(), () -> new BlockItem(b.get(), props.group(WithSprinkles2.TAB)));
     }
 
     @OnlyIn(Dist.CLIENT)

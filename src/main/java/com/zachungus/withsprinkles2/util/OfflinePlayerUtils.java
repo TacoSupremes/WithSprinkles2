@@ -32,16 +32,10 @@ public class OfflinePlayerUtils
 
 	private static void writeOfflinePlayerNBT(UUID uuid, World w)
 	{
-
-
-
-		//SaveHandler saveHandler = (SaveHandler) FMLCommonHandler.instance().getMinecraftServerInstance().worlds[0].getSaveHandler();
-
 		SaveHandler saveHandler = w.getServer().getWorld(DimensionType.OVERWORLD).getSaveHandler();
 
 		try
 		{
-
 			File playersDirectory = new File(saveHandler.getWorldDirectory(), "playerdata");
 
 			File temp = new File(playersDirectory, uuid.toString() + ".dat.tmp");
@@ -52,13 +46,11 @@ public class OfflinePlayerUtils
 				playerFile.delete();
 
 			temp.renameTo(playerFile);
-
 		}
 		catch (Exception e)
 		{
 			WithSprinkles2.LOGGER.log(Level.ERROR, "Player NOT found with UUID" + uuid.toString());
 		}
-
 	}
 
 	/** Gets an Offline Player's NBT **/
@@ -66,9 +58,6 @@ public class OfflinePlayerUtils
 	{
 		if (map.containsKey(uuid))
 			return map.get(uuid);
-
-		//SaveHandler saveHandler = (SaveHandler) FMLCommonHandler.instance().getMinecraftServerInstance().worlds[0].getSaveHandler();
-
 
 		SaveHandler saveHandler = w.getServer().getWorld(DimensionType.OVERWORLD).getSaveHandler();
 		File playersDirectory = new File(saveHandler.getWorldDirectory(), "playerdata");

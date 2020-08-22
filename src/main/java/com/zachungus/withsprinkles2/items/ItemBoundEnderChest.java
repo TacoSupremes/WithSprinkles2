@@ -36,6 +36,7 @@ public class ItemBoundEnderChest extends ItemMod
     public static final TranslationTextComponent ENDER_CHEST_NAME = new TranslationTextComponent("container.enderchest");
 
     public final String PLAYER_UUID = "PLAYER_UUID";
+
     public final String PLAYER_NAME = "PLAYER_NAME";
 
     @Override
@@ -64,8 +65,6 @@ public class ItemBoundEnderChest extends ItemMod
         {
             StringTextComponent s = new StringTextComponent(is.getTag().getString(PLAYER_NAME) + "'s ");
 
-
-
             player.openContainer(new SimpleNamedContainerProvider((id, playerInventory, player2) -> {
 
                 return ChestContainer.createGeneric9X3(id, playerInventory, target != null ? target.getInventoryEnderChest() :  OfflinePlayerUtils.getOfflineEnderChest(u, w));
@@ -88,12 +87,12 @@ public class ItemBoundEnderChest extends ItemMod
         if(stack.hasTag())
         {
             // gray color code
-            tooltip.add(new StringTextComponent("§7" + I18n.format(LibMisc.ModID + '.' + "bound") + ": " +  stack.getTag().getString(PLAYER_NAME)));
+            tooltip.add(new StringTextComponent(I18n.format(LibMisc.ModID + '.' + "bound") + ": " +  stack.getTag().getString(PLAYER_NAME)).applyTextStyle(TextFormatting.GRAY));
         }
         else
         {
             //red color code
-            tooltip.add(new StringTextComponent("§c" + I18n.format(LibMisc.ModID + '.' + "unbound")));
+            tooltip.add(new StringTextComponent(I18n.format(LibMisc.ModID + '.' + "unbound")).applyTextStyle(TextFormatting.RED));
         }
     }
 }
