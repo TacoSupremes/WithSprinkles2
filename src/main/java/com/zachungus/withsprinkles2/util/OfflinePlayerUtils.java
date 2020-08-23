@@ -60,6 +60,7 @@ public class OfflinePlayerUtils
 			return map.get(uuid);
 
 		SaveHandler saveHandler = w.getServer().getWorld(DimensionType.OVERWORLD).getSaveHandler();
+
 		File playersDirectory = new File(saveHandler.getWorldDirectory(), "playerdata");
 
 		try
@@ -149,7 +150,6 @@ public class OfflinePlayerUtils
 					OfflinePlayerUtils.saveOfflineEnderChest(uuid, (World) event.getWorld());
 
 				OfflinePlayerUtils.saveOfflineNBT(uuid, (World) event.getWorld());
-
 			}
 		}
 	}

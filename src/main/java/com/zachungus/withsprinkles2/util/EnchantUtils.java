@@ -124,7 +124,7 @@ public class EnchantUtils
 
 	}
 
-	public static Enchantment randEnchantmentTier(Random rand, ItemStack is, boolean treasure, Rarity rarity)
+	public static Enchantment randEnchantmentTier(Random rand, boolean treasure, Rarity rarity)
 	{
 
 		List<Enchantment> treasureL = new ArrayList<Enchantment>();

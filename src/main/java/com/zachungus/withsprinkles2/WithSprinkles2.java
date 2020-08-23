@@ -6,6 +6,7 @@ import com.zachungus.withsprinkles2.enchants.ModEnchantments;
 import com.zachungus.withsprinkles2.events.WS2Events;
 import com.zachungus.withsprinkles2.items.ModItems;
 import com.zachungus.withsprinkles2.lib.LibMisc;
+import com.zachungus.withsprinkles2.recipes.ModRecipes;
 import com.zachungus.withsprinkles2.util.OfflinePlayerUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -46,6 +47,8 @@ public class WithSprinkles2
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         ModEnchantments.ENCHANTS.register(FMLJavaModLoadingContext.get().getModEventBus());
+
+        ModRecipes.RECIPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         // Register the enqueueIMC method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         // Register the processIMC method for modloading

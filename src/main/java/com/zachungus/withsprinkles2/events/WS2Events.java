@@ -1,7 +1,10 @@
 package com.zachungus.withsprinkles2.events;
 
 import com.zachungus.withsprinkles2.enchants.ModEnchantments;
+import com.zachungus.withsprinkles2.items.ModItems;
 import com.zachungus.withsprinkles2.lib.LibMisc;
+import com.zachungus.withsprinkles2.recipes.EnchantedBookRecipe;
+import com.zachungus.withsprinkles2.recipes.ModRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LogBlock;
@@ -9,11 +12,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.FishingRodItem;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemUseContext;
+import net.minecraft.item.*;
 import net.minecraft.item.crafting.FurnaceRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.ListNBT;
@@ -30,15 +31,43 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 import java.util.Map;
 
 public class WS2Events
 {
+    @SubscribeEvent
+    public static void onPlayerCrafted(PlayerEvent.ItemCraftedEvent event)
+    {
+
+        if(!event.getCrafting().isEmpty() && event.getCrafting().getItem() == Items.ENCHANTED_BOOK)
+        {
+            IInventory inv = event.getInventory();
+
+            int oldPaper = 0;
+
+            for (int i = 0; i < inv.getSizeInventory(); i++)
+            {
+                ItemStack invs = inv.getStackInSlot(i);
+
+                if (!invs.isEmpty() && invs.getItem() == ModItems.LOST_PAGE.get())
+                    oldPaper++;
+            }
+
+            oldPaper--;
+            EnchantedBookRecipe.enchant.set(oldPaper, null);
+        }
+    }
+
+
+
+
     @SubscribeEvent
     public static void onPlayerBreaking(BlockEvent.BreakEvent event)
     {
