@@ -1,26 +1,22 @@
 package com.zachungus.withsprinkles2.recipes;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
-
 import com.zachungus.withsprinkles2.items.ModItems;
 import com.zachungus.withsprinkles2.util.EnchantUtils;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantment.Rarity;
 import net.minecraft.enchantment.EnchantmentData;
-
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.SpecialRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraftforge.common.Tags;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class EnchantedBookRecipe extends SpecialRecipe
 {
@@ -38,7 +34,6 @@ public class EnchantedBookRecipe extends SpecialRecipe
 
 		for (int x = 0; x < inv.getWidth(); x++)
 		{
-
 			for (int y = 0; y < inv.getHeight(); y++)
 			{
 				int slot = x * inv.getWidth() + y;
@@ -50,7 +45,6 @@ public class EnchantedBookRecipe extends SpecialRecipe
 
 				if (is.getItem() == Items.LEATHER)
 				{
-
 					if (hasLeather)
 						return false;
 
@@ -80,7 +74,6 @@ public class EnchantedBookRecipe extends SpecialRecipe
 	@Override
 	public ItemStack getCraftingResult(CraftingInventory inv)
 	{
-
 		ItemStack is = new ItemStack(Items.ENCHANTED_BOOK);
 
 		int oldPaper = 0;
@@ -115,9 +108,6 @@ public class EnchantedBookRecipe extends SpecialRecipe
 		{
 			e = enchant.get(oldPaper);
 		}
-
-
-
 
 		EnchantedBookItem.addEnchantment(is, new EnchantmentData(e, e.getMaxLevel()));
 

@@ -152,5 +152,10 @@ public class OfflinePlayerUtils
 				OfflinePlayerUtils.saveOfflineNBT(uuid, (World) event.getWorld());
 			}
 		}
+
+
+		//WithSprinkles2.LOGGER.debug("World is unloading: " + WithSprinkles2.LOADED_WORLD + " -> 0");
+		// reset world load count used for saving enchants/nbt to the world
+		WithSprinkles2.LOADED_WORLD = 0;
 	}
 }

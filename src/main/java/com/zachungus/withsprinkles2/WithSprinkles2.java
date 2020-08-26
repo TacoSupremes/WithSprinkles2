@@ -6,15 +6,25 @@ import com.zachungus.withsprinkles2.enchants.ModEnchantments;
 import com.zachungus.withsprinkles2.events.WS2Events;
 import com.zachungus.withsprinkles2.items.ModItems;
 import com.zachungus.withsprinkles2.lib.LibMisc;
+import com.zachungus.withsprinkles2.recipes.EnchantedBookRecipe;
 import com.zachungus.withsprinkles2.recipes.ModRecipes;
+import com.zachungus.withsprinkles2.util.WSSavedData;
 import com.zachungus.withsprinkles2.util.OfflinePlayerUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.block.LogBlock;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.RenderTypeLookup;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.*;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.dimension.DimensionType;
+import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -24,8 +34,13 @@ import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Mod(LibMisc.ModID)
 public class WithSprinkles2
@@ -41,8 +56,6 @@ public class WithSprinkles2
         ModBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         ModBlocks.TILES.register(FMLJavaModLoadingContext.get().getModEventBus());
-
-        //ModItems.makeBlockItems();
 
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
@@ -95,6 +108,85 @@ public class WithSprinkles2
     {
         // do something when the server starts
        // LOGGER.info("HELLO from server starting");
+
+    }
+
+    // number of times world loaded  the event is fired multiple times
+    public static int LOADED_WORLD = 0;
+
+    // handles Saving data to world (EnchantedBookRecipe)
+    @SubscribeEvent
+    public void onWorldLoaded(WorldEvent.Load event)
+    {
+        if (!event.getWorld().isRemote() && event.getWorld() instanceof ServerWorld)
+        {
+           // LOGGER.debug("lOADED WORLD");
+
+            WSSavedData saver = WSSavedData.forWorld((ServerWorld) event.getWorld());
+
+            LOADED_WORLD++;
+
+            if(saver.data.contains("ENCHANTS"))
+            {
+                CompoundNBT c = saver.data.getCompound("ENCHANTS");
+
+              //  LOGGER.debug("ENCHANTS FOUND " + LOADED_WORLD);
+
+                for(int i = 0; i < 3; i++)
+                {
+                    String s = c.getString("ENCHANT" + i);
+
+                    Enchantment e = ForgeRegistries.ENCHANTMENTS.getValue(new ResourceLocation(s));
+
+                  //  if(e != null)
+                   //     LOGGER.debug("LOADED: " + s);
+
+                    EnchantedBookRecipe.enchant.set(i, e);
+                }
+            }
+            else
+            {
+              //  LOGGER.debug("ENCHANTS NOT FOUND" + LOADED_WORLD);
+
+                if (LOADED_WORLD == 2)
+                {
+                    EnchantedBookRecipe.enchant = Arrays.asList(null, null, null);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public void onWorldSaved(WorldEvent.Save event)
+    {
+        if (!event.getWorld().isRemote() && event.getWorld() instanceof ServerWorld)
+        {
+            WSSavedData saver = WSSavedData.forWorld((ServerWorld) event.getWorld());
+            CompoundNBT myData = new CompoundNBT();
+
+            CompoundNBT c = new CompoundNBT();
+
+            for(int i = 0; i < 3; i++)
+            {
+                Enchantment e = EnchantedBookRecipe.enchant.get(i);
+
+                if(e == null)
+                {
+                    c.putString("ENCHANT" + i, "null");
+                }
+                else
+                {
+                   // LOGGER.debug("SAVED: " + e.getDisplayName(e.getMaxLevel()).getString());
+                    c.putString("ENCHANT" + i, e.getRegistryName().toString());
+                }
+            }
+
+            myData.put("ENCHANTS", c);
+
+            saver.data = myData;
+            saver.markDirty();
+            LOADED_WORLD++;
+        }
     }
 
     // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD

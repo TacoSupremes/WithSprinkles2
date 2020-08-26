@@ -45,7 +45,6 @@ public class WS2Events
     @SubscribeEvent
     public static void onPlayerCrafted(PlayerEvent.ItemCraftedEvent event)
     {
-
         if(!event.getCrafting().isEmpty() && event.getCrafting().getItem() == Items.ENCHANTED_BOOK)
         {
             IInventory inv = event.getInventory();
@@ -64,8 +63,6 @@ public class WS2Events
             EnchantedBookRecipe.enchant.set(oldPaper, null);
         }
     }
-
-
 
 
     @SubscribeEvent
