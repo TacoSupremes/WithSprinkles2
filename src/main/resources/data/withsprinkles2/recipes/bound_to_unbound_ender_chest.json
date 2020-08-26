@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "withsprinkles2:portable_bound_ender_chest"
+    }
+  ],
+
+  "result": {
+    "item": "withsprinkles2:portable_ender_chest"
+  }
+}

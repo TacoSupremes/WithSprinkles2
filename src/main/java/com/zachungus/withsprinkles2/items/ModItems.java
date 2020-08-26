@@ -59,7 +59,8 @@ public class ModItems
     }
 
     @OnlyIn(Dist.CLIENT)
-    private static Callable<ItemStackTileEntityRenderer> boundChestRenderer() {
+    private static Callable<ItemStackTileEntityRenderer> boundChestRenderer()
+    {
         return () -> new ItemBoundEnderChestRender(TileBoundEnderChest::new);
     }
 }
