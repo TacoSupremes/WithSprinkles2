@@ -21,16 +21,12 @@ import java.util.function.Supplier;
 public class ModItems
 {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, LibMisc.ModID);
-
-   // public static final RegistryObject<Item> rock = ITEMS.register("rock2", () -> new Item(new Item.Properties().group(WithSprinkles2.TAB)));
-
-    // heavy boots sink instantly to bottom of water
-
-    //xp tome to hold xp
-
-    // 4 blaze rods 4 obsidian 1 netherwart
-
+    
     public static final RegistryObject<Item> LAVA_TOTEM = regItem(ItemLavaTotem::new);
+
+   // public static final RegistryObject<Item> XP_TOME = regItem(ItemXPTome::new);
+
+   // public static final RegistryObject<Item> HEAVY_BOOTS = regItem(ItemHeavyBoots::new);
 
     public static final RegistryObject<Item> LOST_PAGE = ITEMS.register("lost_page", () -> new Item(new Item.Properties().group(WithSprinkles2.TAB)));
 
@@ -46,11 +42,11 @@ public class ModItems
 
     public static final RegistryObject<Item> ENDER_HOPPER_ITEM = makeBlockItem(ModBlocks.ENDER_HOPPER);
 
-    public static final RegistryObject<Item> BOUND_ENDER_CHEST_ITEM = ITEMS.register("bound_ender_chest", () -> new BlockItem(ModBlocks.BOUND_ENDER_CHEST.get(), new Item.Properties().group(WithSprinkles2.TAB).setISTER(()-> boundChestRenderer())));
+    public static final RegistryObject<Item> BOUND_ENDER_CHEST_ITEM = ITEMS.register("bound_ender_chest", () -> new BlockItem(ModBlocks.BOUND_ENDER_CHEST.get(), new Item.Properties().group(WithSprinkles2.TAB).setISTER(ModItems::boundChestRenderer)));
 
-    public static RegistryObject<Item> regItem(final Supplier<? extends ItemMod> sup)
+    public static RegistryObject<Item> regItem(final Supplier<? extends Item> sup)
     {
-        return ITEMS.register(sup.get().getItemRegistryName(), sup);
+        return ITEMS.register(((IModItem)sup.get()).getItemRegistryName(), sup);
     }
 
     public static RegistryObject<Item> makeBlockItem(RegistryObject<BlockMod> b)

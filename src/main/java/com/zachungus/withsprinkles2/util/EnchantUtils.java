@@ -17,10 +17,8 @@ import java.util.Random;
 
 public class EnchantUtils
 {
-
 	public static void enchantItem(ItemStack is, Enchantment e, int lvl)
 	{
-
 		ListNBT nbtl = new ListNBT ();
 
 		CompoundNBT nbt = new CompoundNBT();
@@ -39,12 +37,10 @@ public class EnchantUtils
 			is.setTag(new CompoundNBT());
 
 		is.setTagInfo("ench", nbtl);
-
 	}
 
 	public static Enchantment randEnchantmentBook(Random rand, ItemStack is, boolean treasureOnly, Rarity rarity)
 	{
-
 		List<Enchantment> treasure = new ArrayList<Enchantment>();
 		List<Enchantment> canApply = new ArrayList<Enchantment>();
 
@@ -71,12 +67,11 @@ public class EnchantUtils
 			canApply.addAll(treasure);
 
 		return canApply.get(rand.nextInt(canApply.size()));
-
 	}
 
+	/** Returns an Enchantment minimum of the rarity **/
 	public static Enchantment randEnchantmentMinTier(Random rand, ItemStack is, boolean treasure, Rarity rarity)
 	{
-
 		List<Enchantment> treasureL = new ArrayList<Enchantment>();
 		List<Enchantment> canApply = new ArrayList<Enchantment>();
 
@@ -96,12 +91,11 @@ public class EnchantUtils
 			canApply.addAll(treasureL);
 
 		return canApply.get(rand.nextInt(canApply.size()));
-
 	}
 
+	/** Returns an Enchantment up to the rarity **/
 	public static Enchantment randEnchantmentMaxTier(Random rand, ItemStack is, boolean treasure, Rarity rarity)
 	{
-
 		List<Enchantment> treasureL = new ArrayList<Enchantment>();
 		List<Enchantment> canApply = new ArrayList<Enchantment>();
 
@@ -126,7 +120,6 @@ public class EnchantUtils
 
 	public static Enchantment randEnchantmentTier(Random rand, boolean treasure, Rarity rarity)
 	{
-
 		List<Enchantment> treasureL = new ArrayList<Enchantment>();
 		List<Enchantment> canApply = new ArrayList<Enchantment>();
 
@@ -147,6 +140,5 @@ public class EnchantUtils
 			canApply.addAll(treasureL);
 
 		return canApply.get(rand.nextInt(canApply.size()));
-
 	}
 }

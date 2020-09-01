@@ -173,10 +173,11 @@ public class WithSprinkles2
                 if(e == null)
                 {
                     c.putString("ENCHANT" + i, "null");
+                   // LOGGER.debug("SAVED: " + "NULL");
                 }
                 else
                 {
-                   // LOGGER.debug("SAVED: " + e.getDisplayName(e.getMaxLevel()).getString());
+                    //LOGGER.debug("SAVED: " + e.getDisplayName(e.getMaxLevel()).getString());
                     c.putString("ENCHANT" + i, e.getRegistryName().toString());
                 }
             }

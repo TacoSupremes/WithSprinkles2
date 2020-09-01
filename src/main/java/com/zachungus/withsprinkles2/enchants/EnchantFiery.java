@@ -9,7 +9,7 @@ public class EnchantFiery extends EnchantmentMod
 {
 	protected EnchantFiery()
 	{
-		super(Rarity.RARE, EnchantmentType.DIGGER, new EquipmentSlotType[] { EquipmentSlotType.MAINHAND, EquipmentSlotType.OFFHAND });
+		super(Rarity.RARE, EnchantmentType.DIGGER, EquipmentSlotType.MAINHAND);
 	}
 
 	@Override

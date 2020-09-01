@@ -9,7 +9,7 @@ public class EnchantFracking extends EnchantmentMod
 {
 	protected EnchantFracking()
 	{
-		super(Rarity.UNCOMMON, EnchantmentType.DIGGER, new EquipmentSlotType[] { EquipmentSlotType.MAINHAND });
+		super(Rarity.UNCOMMON, EnchantmentType.DIGGER, EquipmentSlotType.MAINHAND);
 	}
 
 	@Override

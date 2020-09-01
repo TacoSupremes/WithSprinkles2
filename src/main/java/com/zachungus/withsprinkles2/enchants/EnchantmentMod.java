@@ -11,5 +11,10 @@ public abstract class EnchantmentMod extends Enchantment
         super(rarityIn, typeIn, slots);
     }
 
+    protected EnchantmentMod(Rarity rarityIn, EnchantmentType typeIn, EquipmentSlotType slot)
+    {
+        super(rarityIn, typeIn, new EquipmentSlotType[]{ slot });
+    }
+
     public abstract String getEnchantRegistryName();
 }

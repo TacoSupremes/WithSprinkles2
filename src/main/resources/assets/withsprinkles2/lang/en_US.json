@@ -17,5 +17,7 @@
     "enchantment.withsprinkles2.fracking": "Fracking",
     "withsprinkles2.bound": "Currently bound to",
     "withsprinkles2.unbound": "Unbound",
-    "withsprinkles2.mode": "Mode"
+    "withsprinkles2.mode": "Mode",
+    "withsprinkles2.currentlvl": "Level",
+    "withsprinkles2.nextlvl": "XP to next level"
 }

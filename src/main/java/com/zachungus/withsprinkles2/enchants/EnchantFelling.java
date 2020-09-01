@@ -9,13 +9,13 @@ public class EnchantFelling extends EnchantmentMod
 {
 	protected EnchantFelling()
 	{
-		super(Rarity.UNCOMMON, EnchantmentType.DIGGER, new EquipmentSlotType[] { EquipmentSlotType.MAINHAND });
+		super(Rarity.UNCOMMON, EnchantmentType.DIGGER, EquipmentSlotType.MAINHAND);
 	}
 
 	@Override
 	public boolean canApply(ItemStack stack)
 	{
-		return stack != ItemStack.EMPTY  && stack.getItem().getToolTypes(stack).contains(ToolType.AXE);
+		return stack != ItemStack.EMPTY && stack.getItem().getToolTypes(stack).contains(ToolType.AXE);
 	}
 
 	@Override

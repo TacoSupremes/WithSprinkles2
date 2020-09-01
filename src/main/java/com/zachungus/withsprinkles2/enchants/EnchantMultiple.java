@@ -1,14 +1,17 @@
 package com.zachungus.withsprinkles2.enchants;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentType;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.*;
+
+import java.util.function.Predicate;
 
 public class EnchantMultiple extends EnchantmentMod
 {
 	protected EnchantMultiple()
 	{
-		super(Rarity.RARE, EnchantmentType.ALL, EquipmentSlotType.values());
+		super(Rarity.RARE, EnchantmentType.BREAKABLE, EquipmentSlotType.MAINHAND);
 	}
 
 	@Override
@@ -32,7 +35,12 @@ public class EnchantMultiple extends EnchantmentMod
 	@Override
 	public boolean canApply(ItemStack stack)
 	{
-		return stack.hasTag() ? stack.getTag().contains("MULTIPLEMODE") ? stack.getTag().getInt("MULTIPLEMODE") == 0 : true : true;
+		return ignoreItems(stack) && (!stack.hasTag() || (!stack.getTag().contains("MULTIPLEMODE") || stack.getTag().getInt("MULTIPLEMODE") == 0));
+	}
+
+	public boolean ignoreItems(ItemStack is)
+	{
+		return !(is.getItem() instanceof ArmorItem || is.getItem() instanceof FishingRodItem);
 	}
 
 	@Override

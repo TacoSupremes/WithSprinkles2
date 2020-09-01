@@ -4,7 +4,7 @@ import com.zachungus.withsprinkles2.enchants.ModEnchantments;
 import com.zachungus.withsprinkles2.items.ModItems;
 import com.zachungus.withsprinkles2.lib.LibMisc;
 import com.zachungus.withsprinkles2.recipes.EnchantedBookRecipe;
-import com.zachungus.withsprinkles2.recipes.ModRecipes;
+import com.zachungus.withsprinkles2.util.EnchantUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LogBlock;
@@ -14,7 +14,9 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.*;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.FurnaceRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.nbt.ListNBT;
@@ -26,7 +28,6 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.Vec3i;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
-import net.minecraft.world.gen.feature.OreFeature;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.ForgeHooks;
@@ -35,10 +36,10 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class WS2Events
 {
@@ -48,6 +49,8 @@ public class WS2Events
         if(!event.getCrafting().isEmpty() && event.getCrafting().getItem() == Items.ENCHANTED_BOOK)
         {
             IInventory inv = event.getInventory();
+
+            Random rand = event.getEntity().getEntityWorld().rand;
 
             int oldPaper = 0;
 
@@ -59,8 +62,16 @@ public class WS2Events
                     oldPaper++;
             }
 
+            // 1 oldPaper gives Common to Rare, 2 gives Uncommon to Rare, 3 gives
+            // treasure enchant and Very Rare
+
+            Enchantment.Rarity r = Enchantment.Rarity.values()[Math.min(oldPaper - 1 + rand.nextInt(2), Enchantment.Rarity.values().length - 1)];
+
+            Enchantment e = EnchantUtils.randEnchantmentTier(rand,oldPaper == 3, oldPaper == 3 ? Enchantment.Rarity.VERY_RARE : r);
+
             oldPaper--;
-            EnchantedBookRecipe.enchant.set(oldPaper, null);
+
+            EnchantedBookRecipe.enchant.set(oldPaper, e);
         }
     }
 
@@ -157,8 +168,6 @@ public class WS2Events
 
         return l;
     }
-
-
 
     private static void breakConnectedIncludeDiagonal(World w, BlockPos pos, Block b, ItemStack is)
     {
@@ -292,25 +301,16 @@ public class WS2Events
         if (!event.getItemStack().hasTag())
             return;
 
-
-        if (event.getItemStack().getItem() instanceof ArmorItem || event.getItemStack().getItem() instanceof FishingRodItem)
-        {
-
-            event.setCanceled(true);
-            event.setCancellationResult(ActionResultType.FAIL);
-            return;
-        }
-
-
         if ((EnchantmentHelper.getEnchantmentLevel(ModEnchantments.MULTIPLE.get(), event.getItemStack()) > 0))
         {
+            event.setCanceled(true);
+            event.setCancellationResult(ActionResultType.FAIL);
+
 
             if (!event.getItemStack().getTag().contains("MULTIPLELVL"))
             {
                 event.getItemStack().getTag().putInt("MULTIPLELVL", EnchantmentHelper.getEnchantmentLevel(ModEnchantments.MULTIPLE.get(), event.getItemStack()));
                 event.getItemStack().getTag().putInt("MULTIPLEMODE", 1);
-
-
 
                 event.getItemStack().getTag().put("ench1", event.getItemStack().getTag().get("Enchantments"));
 
@@ -327,11 +327,9 @@ public class WS2Events
                 }
 
                 event.getItemStack().getTag().remove("Enchantments");
-
             }
             else
             {
-
                 if ((EnchantmentHelper.getEnchantmentLevel(ModEnchantments.MULTIPLE.get(), event.getItemStack()) != event.getItemStack().getTag().getInt("MULTIPLELVL")))
                     event.getItemStack().getTag().putInt("MULTIPLELVL", EnchantmentHelper.getEnchantmentLevel(ModEnchantments.MULTIPLE.get(), event.getItemStack()));
 
@@ -342,8 +340,6 @@ public class WS2Events
 
                     switch (mode)
                     {
-
-
                         case (0) :
                         {
                             event.getItemStack().getTag().put("ench1", event.getItemStack().getEnchantmentTagList());
@@ -468,6 +464,11 @@ public class WS2Events
 
             if (!event.getItemStack().getTag().contains("MULTIPLELVL"))
                 return;
+
+
+            event.setCanceled(true);
+
+            event.setCancellationResult(ActionResultType.FAIL);
 
             if (event.getItemStack().getTag().getInt("MULTIPLEMODE") == 0)
             {

@@ -3,7 +3,7 @@ package com.zachungus.withsprinkles2.items;
 import com.zachungus.withsprinkles2.WithSprinkles2;
 import net.minecraft.item.Item;
 
-public abstract class ItemMod extends Item
+public abstract class ItemMod extends Item implements IModItem
 {
     public ItemMod()
     {
@@ -20,5 +20,4 @@ public abstract class ItemMod extends Item
         return new Item.Properties().group(WithSprinkles2.TAB);
     }
 
-    public abstract String getItemRegistryName();
 }
