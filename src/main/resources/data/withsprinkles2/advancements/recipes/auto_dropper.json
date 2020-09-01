@@ -1,0 +1,44 @@
+{
+  "rewards": {
+    "recipes": [
+      "withsprinkles2:auto_dropper"
+    ]
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "withsprinkles2:auto_dropper"
+      }
+    },
+    "has_dropper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:dropper"
+          }
+        ]
+      }
+    }
+  ,
+    "has_redstone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:redstone"
+          }
+        ]
+      }
+    }
+  },
+  
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dropper",
+      "has_redstone"
+    ]
+  ]
+}

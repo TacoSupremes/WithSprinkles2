@@ -1,0 +1,33 @@
+{
+  "rewards": {
+    "recipes": [
+      "withsprinkles2:portable_bound_ender_chest"
+    ]
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "withsprinkles2:portable_bound_ender_chest"
+      }
+    },
+    "has_ender_pearl": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "withsprinkles2:portable_ender_chest"
+          }
+        ]
+      }
+    }
+  }
+  ,
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_ender_pearl"
+      
+    ]
+  ]
+}

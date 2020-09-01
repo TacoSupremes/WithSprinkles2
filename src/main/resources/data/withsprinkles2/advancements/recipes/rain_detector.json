@@ -1,0 +1,33 @@
+{
+  "rewards": {
+    "recipes": [
+      "withsprinkles2:rain_detector"
+    ]
+  },
+  "criteria": {
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "withsprinkles2:rain_detector"
+      }
+    },
+    "has_bucket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:bucket"
+          }
+        ]
+      }
+    }
+  }
+  ,
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bucket"
+      
+    ]
+  ]
+}

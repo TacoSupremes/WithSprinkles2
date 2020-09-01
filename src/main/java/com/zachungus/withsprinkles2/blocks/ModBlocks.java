@@ -45,10 +45,6 @@ public class ModBlocks
 
     public static final RegistryObject<TileEntityType<TileBoundEnderChest>> TILE_BOUND_ENDER_CHEST = TILES.register(ModBlocks.BOUND_ENDER_CHEST.getId().getPath(), () -> TileEntityType.Builder.create(TileBoundEnderChest::new, ModBlocks.BOUND_ENDER_CHEST.get()).build(null));
 
-
-
-
-
     public static RegistryObject<TileEntityType<?>> regTile(final Supplier<? extends TileEntity> sup, RegistryObject<BlockMod> bm)
     {
         return TILES.register(bm.getId().getPath(), () -> TileEntityType.Builder.create(sup, bm.get()).build(null));
