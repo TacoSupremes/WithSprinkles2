@@ -1,5 +1,6 @@
 package com.zachungus.withsprinkles2;
 
+import com.google.common.collect.ImmutableList;
 import com.zachungus.withsprinkles2.blocks.ModBlocks;
 import com.zachungus.withsprinkles2.blocks.tiles.TileBoundEnderChestRenderer;
 import com.zachungus.withsprinkles2.enchants.ModEnchantments;
@@ -8,6 +9,7 @@ import com.zachungus.withsprinkles2.items.ModItems;
 import com.zachungus.withsprinkles2.lib.LibMisc;
 import com.zachungus.withsprinkles2.recipes.EnchantedBookRecipe;
 import com.zachungus.withsprinkles2.recipes.ModRecipes;
+import com.zachungus.withsprinkles2.util.LootHandler;
 import com.zachungus.withsprinkles2.util.WSSavedData;
 import com.zachungus.withsprinkles2.util.OfflinePlayerUtils;
 import net.minecraft.block.Block;
@@ -22,7 +24,10 @@ import net.minecraft.nbt.ListNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraft.world.storage.loot.LootPool;
+import net.minecraft.world.storage.loot.TableLootEntry;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -73,6 +78,7 @@ public class WithSprinkles2
         MinecraftForge.EVENT_BUS.register(OfflinePlayerUtils.class);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(WS2Events.class);
+        MinecraftForge.EVENT_BUS.register(new LootHandler());
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -102,14 +108,11 @@ public class WithSprinkles2
         // some example code to receive and process InterModComms from other mods
     }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
-    @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event)
-    {
-        // do something when the server starts
-       // LOGGER.info("HELLO from server starting");
 
-    }
+
+
+
+
 
     // number of times world loaded  the event is fired multiple times
     public static int LOADED_WORLD = 0;

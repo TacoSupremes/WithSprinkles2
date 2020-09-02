@@ -39,7 +39,6 @@ import javax.annotation.Nullable;
 
 public class BlockEnderHopper extends BlockMod
 {
-
     public static final DirectionProperty FACING = BlockStateProperties.FACING_EXCEPT_UP;
     public static final BooleanProperty ENABLED = BlockStateProperties.ENABLED;
     private static final VoxelShape INPUT_SHAPE = Block.makeCuboidShape(0.0D, 10.0D, 0.0D, 16.0D, 16.0D, 16.0D);
@@ -56,7 +55,6 @@ public class BlockEnderHopper extends BlockMod
     private static final VoxelShape NORTH_RAYTRACE_SHAPE = VoxelShapes.or(IHopper.INSIDE_BOWL_SHAPE, Block.makeCuboidShape(6.0D, 8.0D, 0.0D, 10.0D, 10.0D, 4.0D));
     private static final VoxelShape SOUTH_RAYTRACE_SHAPE = VoxelShapes.or(IHopper.INSIDE_BOWL_SHAPE, Block.makeCuboidShape(6.0D, 8.0D, 12.0D, 10.0D, 10.0D, 16.0D));
     private static final VoxelShape WEST_RAYTRACE_SHAPE = VoxelShapes.or(IHopper.INSIDE_BOWL_SHAPE, Block.makeCuboidShape(0.0D, 8.0D, 6.0D, 4.0D, 10.0D, 10.0D));
-
 
     public static final TranslationTextComponent ENDER_CHEST_NAME = new TranslationTextComponent("container.hopper");
 
